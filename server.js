@@ -7,23 +7,23 @@ const fastify = require("fastify")({
   trustProxy: true,
 });
 
-const indexRoute = require("./routes/index");
+const routes = require("./routes/index");
 
 fastify
   .register(require("fastify-nextjs"), {
     dev: process.env.NODE_ENV !== "production",
   })
   .after(() => {
-    fastify.next("/", indexRoute);
+    for (path in routes) {
+      fastify.next(path, routes[path]);
+    }
   });
 
-const start = async () => {
+(async () => {
   try {
     await fastify.listen(process.env.PORT || 3000);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
   }
-};
-
-start();
+})();
