@@ -7,6 +7,9 @@ const fastify = require("fastify")({
   trustProxy: true,
 });
 
+// Add easy way of communicating with redis
+fastify.register(require('fastify-redis'), { host: process.env.REDIS_ADDRESS || '127.0.0.1' });
+
 const routes = require("./routes/index");
 
 fastify
