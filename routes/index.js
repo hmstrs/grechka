@@ -1,4 +1,4 @@
 module.exports = {
-  "/": require("./home"),
-  "/products/:slug": require('./home')
+  "/": require("./home").bind(null, '/'),
+  "/products/:slug": require('./home').bind(null, '/')
 };
