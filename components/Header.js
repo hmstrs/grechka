@@ -9,9 +9,9 @@ const Header = ({ productsCount }) => {
   return (
     <header className={styles.Header}>
       <Link href="/">
-        <span className={styles.Header__logo}>Гречка</span>
+        <h1 className={styles.Header__logo}>Гречка</h1>
       </Link>
-      <h1 className={styles.Header__caption}>
+      <h2 className={styles.Header__caption}>
         {productsCount ? (
           <>Ми нашлы {productsCount} рез. по вашему запросу</>
         ) : (
@@ -20,8 +20,9 @@ const Header = ({ productsCount }) => {
             Мы поищем его в магазинах Киева
           </>
         )}
-      </h1>
+      </h2>
       <input
+      id="search"
         type="search"
         inputMode="search"
         className={styles.Header__input}
@@ -31,7 +32,7 @@ const Header = ({ productsCount }) => {
         onKeyDown={({ key }) => key == "Enter" && searchSumbit.current.click()}
       />
       <Link href="/products/[name]" as={`/products/${searchValue}`}>
-        <a>
+        <label htmlFor="search">
           <input
             disabled={!searchValue}
             ref={searchSumbit}
@@ -39,7 +40,7 @@ const Header = ({ productsCount }) => {
             value="&#x1F50D;"
             className={styles.Header__search}
           />
-        </a>
+        </label>
       </Link>
     </header>
   );

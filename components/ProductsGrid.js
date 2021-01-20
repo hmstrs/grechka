@@ -6,7 +6,7 @@ const ProductsGrid = ({ productsList }) => {
       {productsList.map(
         ({ url, image, title, seller, price, weight, producer }) => (
           <a href={url} title={producer} className={styles.Card} key={title}>
-            <img src={image} className={styles.Card__img}/>
+            <img src={image} alt={title} className={styles.Card__img}/>
             <div className={styles.Card__content}>
               <div>
                 <h3>{title}</h3>
