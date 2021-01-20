@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "next build"
+  },
   "dependencies": {
     "fastify": "^3.10.1",
     "fastify-nextjs": "^5.1.0",
