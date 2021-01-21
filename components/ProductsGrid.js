@@ -4,13 +4,13 @@ const ProductsGrid = ({ productsList }) => {
   return (
     <div className={styles.Grid}>
       {productsList.map(
-        ({ url, image, title, seller, price, weight, producer }) => (
-          <a href={url} title={producer} className={styles.Card} key={title}>
-            <img src={image} alt={title} className={styles.Card__img}/>
+        ({ web_url, img, title, seller, price, weight, producer }) => (
+          <a href={web_url} title={producer.trademark} className={styles.Card} key={title}>
+            <img src={img["s200x200"]} alt={title} className={styles.Card__img}/>
             <div className={styles.Card__content}>
               <div>
                 <h3>{title}</h3>
-                <i>{seller}</i>
+                <i>{producer.trademark}</i>
               </div>
               <span>
                 {(price / 100).toLocaleString("uk-UA", {

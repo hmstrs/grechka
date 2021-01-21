@@ -28,6 +28,7 @@
   justify-self: center;
   margin-top: 5%;
   height: 90%;
+  max-width: 90%;
 }
 
 .Card__content {

@@ -17,54 +17,8 @@ const Home = ({ grechka }) => {
   );
 };
 
-export const getStaticProps = async ({ res }) =>
-  // Mock for now, later would be parsed data from fastify
-  ({
-    props: {
-      grechka: [
-        {
-          url:
-            "https://epicentrk.ua/ua/shop/krupa-grechnevaya-khutorok-yadritsya-800-g-4820211661410.html",
-          image: "https://cdn.27.ua/499/61/c2/2712002_1.jpeg",
-          title: "Гречка №1",
-          seller: "Ашан",
-          price: 3990,
-          weight: 1000,
-          producer: "Хуторок",
-        },
-        {
-          url:
-            "https://epicentrk.ua/ua/shop/krupa-grechnevaya-khutorok-yadritsya-800-g-4820211661410.html",
-          image: "https://cdn.27.ua/499/61/c2/2712002_1.jpeg",
-          title: "Гречка №2",
-          seller: "Ашан",
-          price: 3990,
-          weight: 1000,
-          producer: "Хуторок",
-        },
-        {
-          url:
-            "https://epicentrk.ua/ua/shop/krupa-grechnevaya-khutorok-yadritsya-800-g-4820211661410.html",
-          image: "https://cdn.27.ua/499/61/c2/2712002_1.jpeg",
-          title: "Гречка №3",
-          seller: "Ашан",
-          price: 3990,
-          weight: 1000,
-          producer: "Хуторок",
-        },
-        {
-          url:
-            "https://epicentrk.ua/ua/shop/krupa-grechnevaya-khutorok-yadritsya-800-g-4820211661410.html",
-          image: "https://cdn.27.ua/499/61/c2/2712002_1.jpeg",
-          title: "Гречка №4",
-          seller: "Ашан",
-          price: 3990,
-          weight: 1000,
-          producer: "Хуторок",
-        },
-      ],
-    },
-    revalidate: 60,
-  });
+export const getServerSideProps = async ({ res }) => ({
+  props: { grechka: res.result.slice(0, 4) ?? [] },
+});
 
 export default Home;

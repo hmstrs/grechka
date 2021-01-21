@@ -13,7 +13,7 @@ const Header = ({ productsCount }) => {
       </Link>
       <h2 className={styles.Header__caption}>
         {productsCount ? (
-          <>Ми нашлы {productsCount} рез. по вашему запросу</>
+          <>Мы нашли {productsCount} рез. по вашему запросу</>
         ) : (
           <>
             Введите название продукта <br />
