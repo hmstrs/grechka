@@ -6,7 +6,11 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Гречка</title>
-        {/* <meta name="description" key="description" content="" /> */}
+        <meta
+          name="description"
+          key="description"
+          content="Поиск и сравнение цен в супермаркетах Киева"
+        />
       </Head>
       <Component {...pageProps} />
     </>
