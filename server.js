@@ -1,7 +1,7 @@
 const fastify = require("fastify")({
-  logger: {
-    prettyPrint: true,
-  },
+  // logger: {
+  //   prettyPrint: true,
+  // },
   modifyCoreObjects: false,
   onProtoPoisoning: "remove",
   trustProxy: true,
@@ -18,7 +18,7 @@ fastify
   })
   .after(() => {
     for (path in routes) {
-      fastify.next(path, routes[path]);
+      fastify.next(path, routes[path](fastify));
     }
   });
 
