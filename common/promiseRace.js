@@ -1,19 +1,22 @@
 module.exports = (promises, count) => {
+  if (count > promises.length) return [];
   return new Promise((resolve) => {
-    let counter = 0;
-    let results = [];
+    const results = [];
+    const errors = [];
     promises.forEach(promise => {
       promise
-      .then(res => {
-        if (count > counter) {
-          counter++;
+        .then(res => {
           results.push(res);
-        }
-        if (count === counter) {
-          resolve(results);
-        }
-      })
-      .catch();
+          if (count === results.length) resolve(results);
+        })
+        .catch(err => errors.push(err))
+        .finally(() => {
+          // If errors were more than successful promises were expected
+          if (
+            results.length < count &&
+            ((promises.length - errors.length) === results.length)
+          ) resolve(results);
+        })
     });
   });
 };
