@@ -1,7 +1,8 @@
 const fetchShops = require('../common/fetcher');
-const { putIntoRedis, getFromRedisAll } = require('../common/redisManager');
+const { putIntoRedis, getFromRedisRace } = require('../common/redisManager');
 
 const DEFAULT_GOOD = '%D0%BA%D1%80%D1%83%D0%BF%D0%B0+%D0%B3%D1%80%D0%B5%D1%87%D0%BD%D0%B5%D0%B2%D0%B0%D1%8F';
+const GOOD_AMOUNT = 4;
 
 module.exports = fastify => path => async (app, req, reply) => {
   const { redis } = fastify
@@ -9,14 +10,13 @@ module.exports = fastify => path => async (app, req, reply) => {
   // Get data from shops
   let data = await fetchShops(good);
   // Get from redis if fetch failed
-  if (!data.length) {
-    data = await getFromRedisAll(redis, good);
+  if (data.length < GOOD_AMOUNT) {
+    data = await getFromRedisRace(redis, good, GOOD_AMOUNT);
   }
   // Generate data for ssr
-  const renderData = data.filter((x) => x).slice(0, 4);
-  reply.raw.result = renderData;
-  // Render
+  const filteredData = data.filter((x) => x);
+  reply.raw.result = filteredData.map(x => ({ price: x.price, time: Date.now() }));
+
   app.render(req.raw, reply.raw, path, req.query, {});
-  // Additionally save it to redis
-  await Promise.all(renderData.map(data => putIntoRedis(redis, data.ean + good, data)));
+  await Promise.all(filteredData.map(data => putIntoRedis(redis, data.ean + good, data)));
 };
