@@ -6,6 +6,7 @@ const fastify = require("fastify")({
   modifyCoreObjects: false,
   onProtoPoisoning: "remove",
   trustProxy: true,
+  pluginTimeout: 20000,
 });
 
 // Add easy way of communicating with redis
