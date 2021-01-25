@@ -2,6 +2,7 @@ const fastify = require("fastify")({
   // logger: {
   //   prettyPrint: true,
   // },
+  ignoreTrailingSlash: true,
   modifyCoreObjects: false,
   onProtoPoisoning: "remove",
   trustProxy: true,

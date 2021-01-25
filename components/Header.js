@@ -4,7 +4,7 @@ import styles from "../styles/Header.module.css";
 
 const Header = ({ productsCount }) => {
   const [searchValue, setSearchValue] = useState("");
-  const searchSumbit = useRef(null);
+  const searchSubmit = useRef(null);
 
   return (
     <header className={styles.Header}>
@@ -22,20 +22,20 @@ const Header = ({ productsCount }) => {
         )}
       </h2>
       <input
-      id="search"
+        id="search"
         type="search"
         inputMode="search"
         className={styles.Header__input}
         placeholder="Название продукта..."
         value={searchValue}
         onChange={({ target }) => setSearchValue(target.value)}
-        onKeyDown={({ key }) => key == "Enter" && searchSumbit.current.click()}
+        onKeyDown={({ key }) => key == "Enter" && searchSubmit.current.click()}
       />
       <Link href="/products/[name]" as={`/products/${searchValue}`}>
         <label htmlFor="search">
           <input
             disabled={!searchValue}
-            ref={searchSumbit}
+            ref={searchSubmit}
             type="submit"
             value="&#x1F50D;"
             className={styles.Header__search}

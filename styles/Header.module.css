@@ -26,6 +26,20 @@
   cursor: pointer;
 }
 
+.Header__logoGrechka {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  font-family: Ruslan Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+
+  cursor: pointer;
+  color: var(--main-color);
+}
+
 .Header__caption {
   font-weight: 500;
   font-size: calc(20px + 16 * var(--responsive));
