@@ -1,14 +1,14 @@
 import Chart from "../components/Chart";
 import ProductsGrid from "../components/ProductsGrid";
 import styles from "../styles/Header.module.css";
-import Link from "next/link";
+// import Link from "next/link";
 
 const Grechka = ({ grechkaPrices, grechka }) => {
   return (
     <>
-      <Link href="/" prefetch>
+      <a href="/" >
         <h1 className={styles.Header__logoGrechka}>Гречка</h1>
-      </Link>
+      </a>
       <main>
         <Chart productPrices={grechkaPrices} />
         <ProductsGrid productsList={grechka} />
