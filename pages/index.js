@@ -18,7 +18,7 @@ const Home = ({ grechka }) => {
 };
 
 export const getServerSideProps = async ({ res }) => ({
-  props: { grechka: res.result.slice(0, 4) ?? [] },
+  props: { grechka: res.result },
 });
 
 export default Home;
