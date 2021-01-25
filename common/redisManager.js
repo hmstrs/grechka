@@ -11,7 +11,7 @@ const putIntoRedis = async (redis, key, data) => {
   }
 };
 
-const getFromRedisRace = async (redis, key, count) => {
+const getFromRedisRace = async (redis, key, count = 4) => {
   const allKeys = await redis.keys("*" + key);
   if (!allKeys) return [];
   // This sort is used for taking random goods
