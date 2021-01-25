@@ -22,7 +22,7 @@ export const getServerSideProps = async ({ res }) =>
     props: {
       grechka: res.result.data ?? [],
       grechkaPrices: res.result.statistics.map(entry => ({
-        price: entry.price / 100,
+        price: Math.round(entry.price / 100),
         date: new Date(entry.time).toLocaleDateString(),
       })) ?? [],
     },
