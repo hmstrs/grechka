@@ -36,9 +36,9 @@ module.exports = fastify => path => async (app, req, reply) => {
 
   await Promise.all(filteredData.map(data => putIntoRedis(redis, data.ean + good, data)));
   if (good === DEFAULT_GOOD) {
-    const averagePrice = filteredData.map(x => x.price).reduce((prev, cur) => prev + cur);
+    const price = filteredData.map(x => x.price).reduce((prev, cur) => prev + cur);
     const time = Date.now();
-    statistics.push({ averagePrice, time });
+    statistics.push({ price, time });
     await redis.set("statistics" + good, JSON.stringify(statistics));
   }
 };
