@@ -23,6 +23,6 @@ module.exports = ({ redis }) => async (app, req, reply) => {
 
   app.render(req.raw, reply.raw, path, req.query, {});
   await Promise.all(
-    filteredData.map((data) => putIntoRedis(redis, data.ean + good, data))
+    filteredData.map((data) => putIntoRedis(redis, data.ean + GRECHKA, data))
   );
 };
