@@ -18,7 +18,7 @@ const ProductsGrid = ({ productsList }) => {
                   currency: "UAH",
                 })}
                 {" / "}
-                {weight}г.
+                {weight == 0 ? 1000: weight}г.
               </span>
             </div>
           </a>
