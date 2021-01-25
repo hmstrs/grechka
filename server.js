@@ -9,7 +9,7 @@ const fastify = require("fastify")({
 });
 
 // Add easy way of communicating with redis
-fastify.register(require('fastify-redis'), { host: process.env.REDIS_ADDRESS || '127.0.0.1' });
+fastify.register(require('fastify-redis'), { url: process.env.REDIS_ADDRESS || '127.0.0.1:6379' });
 
 const routes = require("./routes/index");
 
