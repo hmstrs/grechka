@@ -34,6 +34,6 @@ TODO: добавиь ссылку на хероку
 
 1.  `git clone https://github.com/hmstrs/grechka && cd grechka` склонируйте репозиторий и перейдти в директорию
 2.  `yarn install` - установка всех зависимостей
-3.  `docker compose up` - запуск докера с приложением
+3.  `docker-compose up` - запуск докера с приложением
 
 Готово - работает :)
