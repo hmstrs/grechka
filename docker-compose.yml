@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    volumes:
+      - /usr/src/app/node_modules
+    links:
+      - redis
+
+  redis:
+    image: redis:3.0
