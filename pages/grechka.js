@@ -6,7 +6,7 @@ import Link from "next/link";
 const Grechka = ({ grechkaPrices, grechka }) => {
   return (
     <>
-      <Link href="/">
+      <Link href="/" prefetch>
         <h1 className={styles.Header__logoGrechka}>Гречка</h1>
       </Link>
       <main>

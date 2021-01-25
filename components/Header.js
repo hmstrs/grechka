@@ -8,7 +8,7 @@ const Header = ({ productsCount }) => {
 
   return (
     <header className={styles.Header}>
-      <Link href="/">
+      <Link href="/" prefetch>
         <h1 className={styles.Header__logo}>Гречка</h1>
       </Link>
       <h2 className={styles.Header__caption}>
@@ -31,7 +31,7 @@ const Header = ({ productsCount }) => {
         onChange={({ target }) => setSearchValue(target.value)}
         onKeyDown={({ key }) => key == "Enter" && searchSubmit.current.click()}
       />
-      <Link href="/products/[name]" as={`/products/${searchValue}`}>
+      {/* <Link href="/products/[name]" as={`/products/${searchValue}`}> */}
         <label htmlFor="search">
           <input
             disabled={!searchValue}
@@ -41,7 +41,7 @@ const Header = ({ productsCount }) => {
             className={styles.Header__search}
           />
         </label>
-      </Link>
+      {/* </Link> */}
     </header>
   );
 };
