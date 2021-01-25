@@ -33,12 +33,12 @@ module.exports = fastify => path => async (app, req, reply) => {
   };
 
   app.render(req.raw, reply.raw, path, req.query, {});
-  const averagePrice = filteredData.map(x => x.price).reduce((prev, cur) => prev + cur);
-  const time = Date.now();
-  statistics.push({ averagePrice, time });
 
   await Promise.all(filteredData.map(data => putIntoRedis(redis, data.ean + good, data)));
   if (good === DEFAULT_GOOD) {
+    const averagePrice = filteredData.map(x => x.price).reduce((prev, cur) => prev + cur);
+    const time = Date.now();
+    statistics.push({ averagePrice, time });
     await redis.set("statistics" + good, JSON.stringify(statistics));
   }
 };
