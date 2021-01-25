@@ -31,8 +31,13 @@ const Header = ({ productsCount }) => {
         onChange={({ target }) => setSearchValue(target.value)}
         onKeyDown={({ key }) => key == "Enter" && searchSubmit.current.click()}
       />
-      <a href={`/products/${searchValue}`}>
-        <label htmlFor="search">
+      <a
+        href={`/products/${searchValue}`}
+        ref={searchSubmit}
+        className={styles.Header__search}
+      >
+        &#x1F50D;
+        {/* <label htmlFor="search">
           <input
             disabled={!searchValue}
             ref={searchSubmit}
@@ -40,7 +45,7 @@ const Header = ({ productsCount }) => {
             value="&#x1F50D;"
             className={styles.Header__search}
           />
-        </label>
+        </label> */}
       </a>
     </header>
   );
