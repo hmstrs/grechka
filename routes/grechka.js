@@ -6,7 +6,7 @@ const GRECHKA =
 
 module.exports = ({ redis }) => async (app, req, reply) => {
   // Get data from shops
-  const data = await fetchShops(GRECHKA);
+  let data = await fetchShops(GRECHKA);
 
   // Get from redis if fetch failed
   if (!data.length) {
@@ -14,15 +14,33 @@ module.exports = ({ redis }) => async (app, req, reply) => {
   }
 
   // Generate data for ssr
-  const filteredData = data.filter((x) => x);
+  const filteredData = data.filter((x) => !!x);
+  // Getting statistics from db by good name
+  let statistics = [];
+  if (good === DEFAULT_GOOD) {
+    statistics = await redis.get("statistics" + good);
+    try {
+      statistics = JSON.parse(statistics);
+      // if (typeof statistics === 'string') statistics = JSON.parse(statistics);
+    } catch (e) {
+      /* ignore error */
+    }
+    if (!statistics) statistics = [];
+  }
 
   reply.raw.result = {
     data: filteredData,
-    statistics: filteredData.map((x) => ({ price: x.price, time: Date.now() })),
+    statistics,
   };
 
   app.render(req.raw, reply.raw, path, req.query, {});
-  await Promise.all(
-    filteredData.map((data) => putIntoRedis(redis, data.ean + GRECHKA, data))
-  );
+
+  await Promise.all(filteredData.map(data => putIntoRedis(redis, data.ean + good, data)));
+  if (good === DEFAULT_GOOD) {
+    const price = filteredData.map(x => x.price).reduce((prev, cur) => prev + cur);
+    const time = Date.now();
+    statistics.push({ price, time });
+    await redis.set("statistics" + good, JSON.stringify(statistics));
+  }
+
 };
