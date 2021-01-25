@@ -36,9 +36,9 @@ module.exports = ({ redis }) => async (app, req, reply) => {
   await Promise.all(
     filteredData.map((data) => putIntoRedis(redis, data.ean + GRECHKA, data))
   );
-  const price = filteredData
+  const price = Math.floor(filteredData
     .map((x) => x.price)
-    .reduce((prev, cur) => prev + cur);
+    .reduce((prev, cur) => prev + cur) / filteredData.length);
   const time = Date.now();
   statistics.push({ price, time });
   await redis.set("statistics" + GRECHKA, JSON.stringify(statistics));
