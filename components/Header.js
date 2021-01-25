@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import styles from "../styles/Header.module.css";
 
 const Header = ({ productsCount }) => {
@@ -8,9 +8,9 @@ const Header = ({ productsCount }) => {
 
   return (
     <header className={styles.Header}>
-      <Link href="/" prefetch>
+      <a href="/" prefetch>
         <h1 className={styles.Header__logo}>Гречка</h1>
-      </Link>
+      </a>
       <h2 className={styles.Header__caption}>
         {productsCount ? (
           <>Мы нашли {productsCount} рез. по вашему запросу</>
@@ -31,7 +31,7 @@ const Header = ({ productsCount }) => {
         onChange={({ target }) => setSearchValue(target.value)}
         onKeyDown={({ key }) => key == "Enter" && searchSubmit.current.click()}
       />
-      {/* <Link href="/products/[name]" as={`/products/${searchValue}`}> */}
+      <a href={`/products/${searchValue}`}>
         <label htmlFor="search">
           <input
             disabled={!searchValue}
@@ -41,7 +41,7 @@ const Header = ({ productsCount }) => {
             className={styles.Header__search}
           />
         </label>
-      {/* </Link> */}
+      </a>
     </header>
   );
 };
