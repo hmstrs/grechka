@@ -5,9 +5,10 @@
 }
 
 .Card {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  gap: calc(8px + 8 * var(--responsive));
+  display: flex;
+  flex-direction: row;
+  /* grid-template-columns: 96px 1fr; */
+  /* gap: calc(8px + 8 * var(--responsive)); */
 
   height: calc(192px + 48 * var(--responsive));
   padding: calc(8px + 8 * var(--responsive));
@@ -25,13 +26,12 @@
 }
 
 .Card__img {
-  justify-self: center;
-  margin-top: 5%;
-  height: 90%;
-  max-width: 90%;
+  width: 40%;
+  height: auto;
 }
 
 .Card__content {
+  max-width: calc(60%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,7 +46,7 @@
   margin-bottom: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
 }
 
 .Card span {
