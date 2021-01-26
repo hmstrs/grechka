@@ -37,7 +37,11 @@ module.exports = ({ redis }) => async (app, req, reply) => {
     filteredData.map((data) => putIntoRedis(redis, data.ean + GRECHKA, data))
   );
   const price = Math.floor(filteredData
-    .map((x) => x.price)
+    .map((x) => {
+      let weight = x.weight;
+      if (x.weight == 0) weight = 1000;
+      return (x.price / weight) * 1000;
+    })
     .reduce((prev, cur) => prev + cur) / filteredData.length);
   const time = Date.now();
   statistics.push({ price, time });
