@@ -1,12 +1,26 @@
-import styles from "../styles/ProductsGrid.module.css"
+import styles from "../styles/ProductsGrid.module.css";
 
 const ProductsGrid = ({ productsList }) => {
   return (
     <div className={styles.Grid}>
-      {productsList.map(
-        ({ web_url, img, title, seller, price, weight, producer }) => (
-          <a href={web_url} title={producer.trademark} className={styles.Card} key={title}>
-            <img src={img["s200x200"]} alt={title} className={styles.Card__img}/>
+      {productsList
+        .sort(
+          (a, b) =>
+            a.price * (1000 / (a.weight ? a.weight : 1000)) -
+            b.price * (1000 / (b.weight ? b.weight : 1000))
+        )
+        .map(({ web_url, img, title, price, weight, producer }) => (
+          <a
+            href={web_url}
+            title={producer.trademark}
+            className={styles.Card}
+            key={title}
+          >
+            <img
+              src={img["s200x200"]}
+              alt={title}
+              className={styles.Card__img}
+            />
             <div className={styles.Card__content}>
               <div>
                 <h3>{title}</h3>
@@ -18,12 +32,11 @@ const ProductsGrid = ({ productsList }) => {
                   currency: "UAH",
                 })}
                 {" / "}
-                {weight == 0 ? 1000: weight}г.
+                {weight == 0 ? `1к` : weight}г.
               </span>
             </div>
           </a>
-        )
-      )}
+        ))}
     </div>
   );
 };
